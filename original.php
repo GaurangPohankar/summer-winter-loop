@@ -2,7 +2,7 @@
 
 $days=0;
 $season="summer";
-$totalDaysToRun=22;
+$totalDaysToRun=13;
 $num = 30;
 
 #full day
@@ -24,51 +24,107 @@ for ($i = 1; $i <= $totalDaysToRun; $i++) {
     
 
     //full day's run starts
-    
+
+        //for bird character
+        $isBirdAwake=FALSE;
+        $isBirdSinging=FALSE;
+        $hasBirdFed = FALSE;
+
+
         for ($currentMinute = $startTime; $currentMinute <= $endTime; $currentMinute += 30) 
         {   
-            //for bird character
-            $is_bird_awake=FALSE;
-            $is_bird_singing=FALSE;
-
             
             if( $season == "summer")
             {   
+                
+
+                if( $currentMinute == $summerStartTime)
+                {
+                    print_r("Time is 6:00am, the sunrise. We are in summer \n");
+                }
                 if( $currentMinute == $birdWakeUpTime)
                 {
                     print_r("Bird woke up \n");
                     $isBirdAwake=TRUE;
                 }
-
                 if( $currentMinute == $summerStartTime)
                 {
-                    print_r("Time is 6:00am, the sunrise. We in summer \n");
+                    print_r("Rooster sings\n");
+                    print_r("Dog barks\n");
                 }
+
+                if ($isBirdAwake && $hasBirdFed==FALSE) 
+                {
+                    print_r("Bird goes off to feed on nectar \n");
+            
+                    $totalNectarEaten = rand(5, 15);
+            
+                    print_r("Bird eats nectar x" . $totalNectarEaten . " \n");
+            
+                    if ($totalNectarEaten > 10) {
+                        print_r("Bird sleeps \n");
+                    }
+                    $hasBirdFed = TRUE;
+                }
+                
+                
+                if($currentMinute == $summerEndTime)
+                {   
+                    print_r("Sun sets \n");
+                    print_r("Bird sleeps \n");
+                }
+
 
             } 
+            //else condition represents the winter season
             else
             {   
+
                 if( $currentMinute == $birdWakeUpTime)
                 {
                     print_r("Bird woke up \n");
                     $isBirdAwake=TRUE;
                 }
-                if( $currentMinute == $summerStartTime)
+
+                if ($currentMinute >= $winterStartTime && $currentMinute <= ($birdWakeUpTime + 60)) {
+                    print_r("Bird sings \n");
+                }
+
+                if( $currentMinute == $winterStartTime)
                 {
                     print_r("Time is 7:00am, the sunrise. We in winter \n");
                 }
-            }
-
-
-
-            if($isBirdAwake)
-            {
-                print_r("Bird Goes off to Feed on nectar \n");
                 
-                $totalNectorEaten = rand(5, 15);
+                if( $currentMinute == $winterStartTime)
+                {
+                    print_r("Rooster sings\n");
+                    print_r("Dog barks\n");
+                }
 
-                print_r("Bird eats nectar x".$totalNectorEaten." \n");
+                if ($isBirdAwake && $hasBirdFed==FALSE) {
+                    print_r("Bird Goes off to Feed on nectar \n");
+            
+                    $totalNectarEaten = rand(5, 15);
+            
+                    print_r("Bird eats nectar x" . $totalNectarEaten . " \n");
+            
+                    if ($totalNectarEaten > 10) {
+                        print_r("Bird sleeps \n");
+                    }
+                    $hasBirdFed = TRUE;
+                }
+
+                if($currentMinute == $winterEndTime)
+                {   
+                    print_r("Sun sets \n");
+                    print_r("Bird sleeps \n");
+                }
+
             }
+
+
+
+            
 
 
 
