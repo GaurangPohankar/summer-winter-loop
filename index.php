@@ -19,6 +19,10 @@ $winterEndTime = 1140; //7pm
 
 $birdWakeUpTime=360;
 
+// Initialize the flower color as green during summer
+$flowerColor = "green"; // Initialize the flower color as green during summer
+$flowerColorChangeTime = 420; // 7 AM in minutes, when the flower changes color
+$flowerColorResetTime = 480; 
 
 for ($i = 1; $i <= $totalDaysToRun; $i++) {
     
@@ -66,7 +70,23 @@ for ($i = 1; $i <= $totalDaysToRun; $i++) {
                     }
                     $hasBirdFed = TRUE;
                 }
+
+                print_r("Time is ".$currentMinute. " \n");
                 
+                // Check if it's time for the flower to change color
+                if ($currentMinute == $flowerColorChangeTime) {
+                    print_r("Flower changes color to red \n");
+                    $flowerColor = "red";
+                } elseif ($currentMinute == $flowerColorResetTime) {
+                    print_r("Flower color resets to green \n");
+                    $flowerColor = "green";
+                } elseif ($currentMinute > $flowerColorChangeTime && $currentMinute < $flowerColorResetTime) {
+                    if ($flowerColor == "red") {
+                        print_r("Flower changes color to blue \n");
+                        $flowerColor = "blue";
+                    }
+                }
+
                 
                 if($currentMinute == $summerEndTime)
                 {   
@@ -113,6 +133,8 @@ for ($i = 1; $i <= $totalDaysToRun; $i++) {
                     }
                     $hasBirdFed = TRUE;
                 }
+
+                print_r("Time is ".$currentMinute . " \n");
 
                 if($currentMinute == $winterEndTime)
                 {   
