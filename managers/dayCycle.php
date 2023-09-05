@@ -1,5 +1,5 @@
 <?php
-require_once('SeasonManager.php'); // Include the SeasonManager class
+require_once('SeasonManager.php'); 
 require_once('./controllers/BirdController.php');
 require_once('./controllers/FlowerController.php');
 require_once('./controllers/RoosterController.php');
@@ -34,7 +34,7 @@ class DayCycle {
 
             for ($currentMinute = Constants::FULL_DAY_START; $currentMinute <= Constants::FULL_DAY_END; $currentMinute += 30) {
                 if ($currentMinute < Constants::SUMMER_DAY_START) {
-                    continue; // Skip printing time before sunrise and after sunset
+                    continue; 
                 }
 
                 $this->flowerController->changeColor($currentMinute, $season);
@@ -47,7 +47,7 @@ class DayCycle {
                     $this->printSunset();
                     $this->birdController->sleep();
                     $this->flowerController->sleep();
-                    break; // Skip printing time after sunset
+                    break; 
                 }
 
                 if ($currentMinute == Constants::WINTER_DAY_START && $season == "winter") {
@@ -58,7 +58,7 @@ class DayCycle {
                     $this->printSunset();
                     $this->birdController->sleep();
                     $this->flowerController->sleep();
-                    break; // Skip printing time after sunset
+                    break; 
                 }
 
                 $this->printTime($currentMinute);
